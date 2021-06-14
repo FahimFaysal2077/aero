@@ -1,21 +1,29 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import LoginScreen from './components/Screens/LoginScreen/LoginScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import RegisterScreen from './components/Screens/RegisterScreen/RegisterScreen';
+import HomeScreen from './components/Screens/HomeScreen/HomeScreen';
+
 
 const Stack = createStackNavigator();
 
+const globalScreenOptions = {
+  headerStyle: { backgroundColor: '#2C6BED'},
+  headerTitleStyle: { color: 'white'},
+  headerTintColor: 'white',
+}
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Screen name = 'Login' component = {LoginScreen} />
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-
-        <Text>Let's build AERO</Text>
-      </View>
+      <Stack.Navigator screenOptions={globalScreenOptions}>
+        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name='Register' component={RegisterScreen} />
+        <Stack.Screen name='Home' component={HomeScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
 
   );
