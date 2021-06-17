@@ -25,13 +25,13 @@ const ChatScreen = ({ navigation, route }) => {
             headerTitleAlign: 'left',
             headerTitle: () => (
                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <Avatar rounded source={{ uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png' }} />
+                    <Avatar rounded source={{ uri: messages[0]?.data.photoURL || 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png' }} />
                     <Text style={{ color: 'white', marginLeft: 10, fontWeight: '700' }}>{route.params.chatName}</Text>
                 </View>
             ),
             headerLeft: () => (
                 <TouchableOpacity style={{ marginLeft: 10 }} onPress={navigation.goBack} >
-                    <AntDesign name='arrowLeft' size={24} color='white' />
+                    <AntDesign name='arrowleft' size={24} color='white' />
                 </TouchableOpacity>
             ),
             headerRight: () => (
@@ -45,7 +45,7 @@ const ChatScreen = ({ navigation, route }) => {
                 </View>
             )
         });
-    }, [navigation]);
+    }, [navigation, messages]);
 
     const sendMessage = () => {
         Keyboard.dismiss();
@@ -102,7 +102,7 @@ const ChatScreen = ({ navigation, route }) => {
                                         <Text style={styles.receiverText}>{data.message}</Text>
                                     </View>
                                 ) : (
-                                    <View style={styles.sender}>
+                                    <View key={id} style={styles.sender}>
                                         <Avatar 
                                         position='absolute' 
                                         rounded 
